@@ -28,16 +28,16 @@ CMake will be provided with 2 parameters:
 
 ### Usage
 ```yaml
-uses: coders-school/github-actions/run-tests@main
-with:
-  task_name: 'unique_ptr'
-  test_file: '../tests/unique_ptr_tests.cpp'
+- uses: coders-school/github-actions/run-tests@main
+  with:
+    task_name: 'unique_ptr'
+    test_file: '../tests/unique_ptr_tests.cpp'
 ```
 
 ```yaml
-uses: coders-school/github-actions/run-tests@main
-with:
-  task_name: 'unique_ptr'
-  test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
-  test_to_run: 'unique_ptr_student'
+- uses: coders-school/github-actions/run-tests@main
+  with:
+    task_name: 'unique_ptr'
+    test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
+    test_to_run: 'unique_ptr_student'
 ```
