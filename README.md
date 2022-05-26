@@ -18,8 +18,8 @@ Builds and runs tests.
 Build directory is `.github/scripts/build`.
 To work properly, it needs a CMakeLists.txt file in `.github/scripts`.
 CMake will be provided with 2 parameters:
-- `Task` - task name that should be built
-- `Framework` - UT framework that should be used (catch2 or gtest)
+- `TASK` - task name that should be built
+- `TEST_FRAMEWORK` - UT framework that should be used (catch2 or gtest)
 
 ### Parameters
 - `task_name` - name of the task (*required*)
