@@ -41,3 +41,35 @@ CMake will be provided with 2 parameters:
     test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
     test_to_run: 'unique_ptr_student'
 ```
+
+## Coverage check action
+Builds and runs tests.
+Then runs coverage check.
+It uses both "Run tests" and "Coverage rate comment" actions.
+
+### Parameters
+- `task_name` - name of the task (*required*)
+- `test_file` - path to the file containing tests (*required*)
+- `test-to_run` - name of the executable to build and run (default value is equal to `task_name`)
+- `lcov_file` - name of the file that need to be included in coverage report (*required*)
+- `template_pattern` - regex pattern that matches template instantiation. If it's not provided, template instantiation check will be skipped.
+
+### Usage
+```yaml
+- uses: coders-school/github-actions/coverage-check@coverage_action
+  with:
+    task_name: 'unique_ptr'
+    test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
+    test_to_run: 'unique_ptr_student'
+    lcov_file: 'unique_ptr.hpp'
+    template_pattern: 'template\s*class\s*my::unique_ptr<\s*\w+\s*>'
+```
+
+```yaml
+- uses: coders-school/github-actions/coverage-check@coverage_action
+  with:
+    task_name: 'unique_ptr'
+    test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
+    test_to_run: 'unique_ptr_student'
+    lcov_file: 'unique_ptr.hpp'
+```

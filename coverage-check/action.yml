@@ -1,0 +1,35 @@
+name: 'Check coverage rate of students tests'
+description: 'Compiles and runs students tests. Then checks coverage rate'
+inputs:
+  task_name:
+    description: 'Task name'
+    required: true
+  test_file:
+    description: 'Test file'
+    required: true
+  test_to_run:
+    description: 'Name of test that should be run'
+  lcov_file:
+    description: 'Regex pattern for file that should be included in coverage report'
+    required: true
+  template_pattern:
+    description: 'Regex pattern for template instantiation'
+runs:
+  using: 'composite'
+  steps:
+    - run: sudo apt install lcov
+      shell: bash
+    - uses : coders-school/github-actions/run-tests@main
+      with:
+        task_name: ${{ inputs.task_name }}
+        test_file: ${{ inputs.test_file }}
+        test_to_run: ${{ inputs.test_to_run }}
+    - run: $GITHUB_ACTION_PATH/coverage.sh "${{ inputs.test_file }}" "${{ inputs.lcov_file }}" "${{ inputs.template_pattern }}"
+      shell: bash
+    - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: Coverage-report
+        path: ./.github/scripts/build/report/
+    - uses: coders-school/github-actions/coverage-rate-comment@main
+      if: ${{ failure() && github.event_name == 'pull_request' }}
