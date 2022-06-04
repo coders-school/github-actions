@@ -56,7 +56,7 @@ It uses both "Run tests" and "Coverage rate comment" actions.
 
 ### Usage
 ```yaml
-- uses: coders-school/github-actions/coverage-check@coverage_action
+- uses: coders-school/github-actions/coverage-check@main
   with:
     task_name: 'unique_ptr'
     test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
@@ -66,7 +66,7 @@ It uses both "Run tests" and "Coverage rate comment" actions.
 ```
 
 ```yaml
-- uses: coders-school/github-actions/coverage-check@coverage_action
+- uses: coders-school/github-actions/coverage-check@main
   with:
     task_name: 'unique_ptr'
     test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
