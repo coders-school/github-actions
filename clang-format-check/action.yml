@@ -1,0 +1,12 @@
+name: 'Clang-format check'
+description: 'Checks code formatting using clang-format'
+inputs:
+  check_path:
+    description: 'Path to task directory'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - uses: jidicula/clang-format-action@v4.5.0
+      with:
+        check-path: ${{ inputs.check_path }}
