@@ -56,7 +56,7 @@ It uses both "Run tests" and "Coverage rate comment" actions.
 
 ### Usage
 ```yaml
-- uses: coders-school/github-actions/coverage-check@coverage_action
+- uses: coders-school/github-actions/coverage-check@main
   with:
     task_name: 'unique_ptr'
     test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
@@ -66,10 +66,24 @@ It uses both "Run tests" and "Coverage rate comment" actions.
 ```
 
 ```yaml
-- uses: coders-school/github-actions/coverage-check@coverage_action
+- uses: coders-school/github-actions/coverage-check@main
   with:
     task_name: 'unique_ptr'
     test_file: '../../../homework/unique_ptr/unique_ptr_tests.cpp'
     test_to_run: 'unique_ptr_student'
     lcov_file: 'unique_ptr.hpp'
+```
+
+## Clang-format check
+Checks code formatting using clang-format.
+It requires `.clang-format` file in repo's top-level directory.
+
+### Parameters
+- `check_path` - path to task directory (*required*)
+
+### Usage
+```yaml
+- uses: coders-school/github-actions/clang-format-check@main
+  with:
+    check-path: 'homework/shared_ptr'
 ```
