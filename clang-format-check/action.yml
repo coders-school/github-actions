@@ -7,6 +7,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: jidicula/clang-format-action@v4.5.0
-      with:
-        check-path: ${{ inputs.check_path }}
+    - run: $GITHUB_ACTION_PATH/clang-format-check.sh ${{ inputs.check_path }}
+      shell: bash
