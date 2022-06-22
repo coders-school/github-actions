@@ -80,10 +80,18 @@ It requires `.clang-format` file in repo's top-level directory.
 
 ### Parameters
 - `check_path` - path to task directory (*required*)
+- `exclude_dir` - directory that need to be excluded from formatting check
 
 ### Usage
 ```yaml
 - uses: coders-school/github-actions/clang-format-check@main
   with:
-    check-path: 'homework/shared_ptr'
+    check_path: 'homework/shared_ptr'
+```
+
+```yaml
+- uses: coders-school/github-actions/clang-format-check@main
+  with:
+    check_path: 'homework/shared_ptr'
+    exclude_dir: './tests'
 ```
