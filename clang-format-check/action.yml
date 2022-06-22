@@ -4,8 +4,10 @@ inputs:
   check_path:
     description: 'Path to task directory'
     required: true
+  exclude_dir:
+    description: 'Directory that need to be excluded from formatting check'
 runs:
   using: 'composite'
   steps:
-    - run: $GITHUB_ACTION_PATH/clang-format-check.sh ${{ inputs.check_path }}
+    - run: $GITHUB_ACTION_PATH/clang-format-check.sh ${{ inputs.check_path }} ${{ inputs.exclude_dir }}
       shell: bash
