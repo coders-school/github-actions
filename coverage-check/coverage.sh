@@ -14,10 +14,14 @@ if [[ $# == 3 ]]; then
     fi
 fi
 
-lcov --directory . --capture --output-file coverage.info > /dev/null
-lcov --extract coverage.info "*/$2" --output-file coverage.info > /dev/null
+# lcov 2.x (ubuntu-24.04) aborts on gcc's inconsistent line data; 1.x doesn't know this option
+ignore=()
+[[ $(lcov --version) =~ version\ 2 ]] && ignore=(--ignore-errors inconsistent,inconsistent)
 
-report=$(lcov --list coverage.info)
+lcov "${ignore[@]}" --directory . --capture --output-file coverage.info > /dev/null
+lcov "${ignore[@]}" --extract coverage.info "*/$2" --output-file coverage.info > /dev/null
+
+report=$(lcov "${ignore[@]}" --list coverage.info)
 pattern_lcov="$2\s*\|\s*([0-9]{2,3}(\.[0-9])?)%"
 
 if [[ ${report//$'\n'/' '} =~ $pattern_lcov ]]; then
@@ -25,7 +29,7 @@ if [[ ${report//$'\n'/' '} =~ $pattern_lcov ]]; then
         echo "✅ Test coverage rate is higher than 90%"
     else
         echo "❌ Test coverage rate is lower than 90%"
-        genhtml coverage.info -o report > /dev/null
+        genhtml "${ignore[@]}" coverage.info -o report > /dev/null
         exit 1
     fi
 else
