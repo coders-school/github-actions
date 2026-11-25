@@ -17,7 +17,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: sudo apt install lcov
+    - run: sudo apt-get update -q && sudo apt-get install -y lcov
       shell: bash
     - uses : coders-school/github-actions/run-tests@main
       with:
@@ -26,10 +26,8 @@ runs:
         test_to_run: ${{ inputs.test_to_run }}
     - run: $GITHUB_ACTION_PATH/coverage.sh "${{ inputs.test_file }}" "${{ inputs.lcov_file }}" "${{ inputs.template_pattern }}"
       shell: bash
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: Coverage-report
+        name: Coverage-report-${{ inputs.task_name }}
         path: ./.github/scripts/build/report/
-    - uses: coders-school/github-actions/coverage-rate-comment@main
-      if: ${{ failure() && github.event_name == 'pull_request' }}
