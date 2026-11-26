@@ -1,1 +1,1 @@
-test PR, do zamknięcia
+test PR, do zamknięcia (2)
